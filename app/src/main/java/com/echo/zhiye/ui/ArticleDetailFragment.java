@@ -44,7 +44,14 @@ public class ArticleDetailFragment extends Fragment {
             ImageView image=v.findViewById(R.id.detail_image);
             if(n.imageUrl!=null&&!n.imageUrl.isEmpty()) Glide.with(this).load(n.imageUrl).centerCrop().into(image);
             else image.setVisibility(View.GONE);
-            v.findViewById(R.id.detail_bookmark).setOnClickListener(x->{ vm.bookmark(n.id); Toast.makeText(requireContext(),n.isBookmarked?"已取消收藏":"已加入收藏",Toast.LENGTH_SHORT).show(); });
+            TextView bookmark=v.findViewById(R.id.detail_bookmark);
+            bookmark.setText(n.isBookmarked?"已收藏":"收藏");
+            bookmark.setOnClickListener(x->{
+                n.isBookmarked=!n.isBookmarked;
+                vm.bookmark(n.id);
+                bookmark.setText(n.isBookmarked?"已收藏":"收藏");
+                Toast.makeText(requireContext(),n.isBookmarked?"已加入收藏":"已取消收藏",Toast.LENGTH_SHORT).show();
+            });
             v.findViewById(R.id.detail_original).setOnClickListener(x->{
                 if(n.url==null||n.url.isEmpty()) Toast.makeText(requireContext(),"该样例没有原文链接",Toast.LENGTH_SHORT).show();
                 else startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(n.url)));
