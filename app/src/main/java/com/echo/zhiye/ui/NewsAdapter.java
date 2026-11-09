@@ -34,7 +34,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.Holder> {
   if(n.imageUrl!=null&&!n.imageUrl.isEmpty())Glide.with(h.image).load(n.imageUrl).centerCrop().placeholder(R.drawable.bg_image_placeholder).error(R.drawable.bg_image_placeholder).into(h.image);
   else h.image.setImageResource(R.drawable.bg_image_placeholder);
   h.itemView.setOnClickListener(v->listener.open(n));
-  h.bookmark.setOnClickListener(v->{n.isBookmarked=!n.isBookmarked;notifyItemChanged(h.getBindingAdapterPosition());listener.bookmark(n);});
+  h.bookmark.setOnClickListener(v->{n.isBookmarked=!n.isBookmarked;int position=h.getBindingAdapterPosition();if(position!=RecyclerView.NO_POSITION)notifyItemChanged(position);listener.bookmark(n);});
  }
  @Override public int getItemCount(){return items.size();}
  static class Holder extends RecyclerView.ViewHolder{
