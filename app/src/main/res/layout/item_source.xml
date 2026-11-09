@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_marginTop="6dp" android:layout_marginBottom="6dp"
-    app:cardBackgroundColor="@color/paper" app:cardCornerRadius="2dp" app:cardElevation="0dp" app:strokeColor="@color/rule" app:strokeWidth="1dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="14dp">
-        <TextView android:id="@+id/source_name" android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="BBC News" android:textColor="@color/ink" android:textSize="18sp" android:fontFamily="serif" android:textStyle="bold"/>
-        <TextView android:id="@+id/source_description" android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="来源介绍" android:textColor="@color/secondary_ink" android:textSize="12sp" android:layout_marginTop="3dp"/>
-        <TextView android:id="@+id/source_status" android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="官方公开 RSS" android:textColor="@color/accent" android:textSize="10sp" android:layout_marginTop="6dp"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="end">
-            <com.google.android.material.button.MaterialButton android:id="@+id/source_read" android:layout_width="wrap_content" android:layout_height="40dp"
-                android:text="查看报道" android:textSize="11sp" style="@style/Widget.MaterialComponents.Button.TextButton"/>
-            <com.google.android.material.button.MaterialButton android:id="@+id/source_open" android:layout_width="wrap_content" android:layout_height="40dp"
-                android:text="媒体官网" android:textSize="11sp" style="@style/Widget.MaterialComponents.Button.TextButton"/>
-        </LinearLayout>
-    </LinearLayout>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
+ app:cardBackgroundColor="@color/surface_white" app:cardCornerRadius="8dp" app:cardElevation="0dp" app:strokeColor="@color/rule" app:strokeWidth="1dp">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="12dp">
+  <TextView android:id="@+id/source_name" android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:text="BBC News" android:textColor="@color/ink" android:textSize="16sp" android:textStyle="bold"/>
+  <TextView android:id="@+id/source_description" android:layout_width="match_parent" android:layout_height="wrap_content"
+   android:text="来源介绍" android:textColor="@color/secondary_ink" android:textSize="12sp" android:layout_marginTop="3dp"/>
+  <TextView android:id="@+id/source_status" android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:text="官方公开 RSS" android:textColor="@color/accent" android:textSize="10sp" android:layout_marginTop="5dp"/>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="end">
+   <com.google.android.material.button.MaterialButton android:id="@+id/source_read" android:layout_width="wrap_content" android:layout_height="38dp"
+    android:text="查看报道" android:textSize="11sp" style="@style/Widget.MaterialComponents.Button.TextButton"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/source_open" android:layout_width="wrap_content" android:layout_height="38dp"
+    android:text="媒体官网" android:textSize="11sp" style="@style/Widget.MaterialComponents.Button.TextButton"/>
+  </LinearLayout>
+ </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
