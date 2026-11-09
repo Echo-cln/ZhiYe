@@ -53,7 +53,15 @@ public class NewsRepository {
         for(NewsSource source:feeds) io.execute(()->{
             try {
                 List<NewsEntity> articles=parser.fetch(source);
-                if(!articles.isEmpty()) { dao.upsertAll(articles); imported.addAndGet(articles.size()); }
+                for(NewsEntity article:articles) {
+                    // Insert new records, then refresh only publisher metadata for existing records.
+                    // User-owned bookmark/read state is intentionally preserved across syncs.
+                    dao.insertIfAbsent(article);
+                    dao.updateRemoteMetadata(article.id,article.title,article.summary,article.body,
+                            article.imageUrl,article.sourceName,article.sourceId,article.topic,
+                            article.author,article.publishedAt);
+                }
+                imported.addAndGet(articles.size());
             } catch(Exception e) { failed.incrementAndGet(); }
             if(remaining.decrementAndGet()==0 && cb!=null)
                 main.post(()->cb.onComplete(imported.get(),failed.get()));
