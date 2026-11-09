@@ -21,7 +21,7 @@ public interface NewsDao {
  @Query("UPDATE news_articles SET title=:title, summary=:summary, body=:body, imageUrl=:imageUrl, sourceName=:sourceName, sourceId=:sourceId, topic=:topic, author=:author, publishedAt=:publishedAt WHERE id=:id AND isLocal=0")
  void updateRemoteMetadata(String id,String title,String summary,String body,String imageUrl,String sourceName,String sourceId,String topic,String author,long publishedAt);
  @Query("UPDATE news_articles SET isBookmarked=:saved,savedAt=:savedAt WHERE id=:id") void setBookmark(String id,boolean saved,long savedAt);
- @Query("UPDATE news_articles SET readAt=:readAt, readProgress=:progress WHERE id=:id") void updateReadProgress(String id,int progress,long readAt);
+ @Query("UPDATE news_articles SET readAt=:readAt,readProgress=:progress WHERE id=:id AND readAt<=:readAt") void updateReadProgress(String id,int progress,long readAt);
  @Query("UPDATE news_articles SET readAt=:readAt WHERE id=:id") void markRead(String id,long readAt);
  @Query("DELETE FROM news_articles WHERE id=:id AND isLocal=1") void deleteLocal(String id);
  @Query("UPDATE news_articles SET readAt=0,readProgress=0 WHERE readAt>0") void clearHistory();
