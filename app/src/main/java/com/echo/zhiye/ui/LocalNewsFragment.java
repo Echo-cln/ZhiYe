@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -22,7 +23,11 @@ public class LocalNewsFragment extends Fragment {
         RecyclerView list=v.findViewById(R.id.local_news_list); list.setLayoutManager(new LinearLayoutManager(requireContext()));
         NewsAdapter adapter=new NewsAdapter(new NewsAdapter.Listener() {
             @Override public void open(NewsEntity n) { Bundle b=new Bundle(); b.putString("articleId",n.id); Navigation.findNavController(v).navigate(R.id.editorFragment,b); }
-            @Override public void bookmark(NewsEntity n) { vm.deleteLocal(n.id); }
+            @Override public void bookmark(NewsEntity n) {
+                new AlertDialog.Builder(requireContext()).setTitle("删除本地新闻？")
+                    .setMessage("删除后无法恢复。").setNegativeButton("取消",null)
+                    .setPositiveButton("删除",(d,w)->vm.deleteLocal(n.id)).show();
+            }
         }); list.setAdapter(adapter);
         vm.local().observe(getViewLifecycleOwner(),items->{
             adapter.submit(items);
