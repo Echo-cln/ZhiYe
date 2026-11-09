@@ -38,10 +38,11 @@ public class RssParser {
                     if(name.equals("title")) item.title=clean(p.nextText());
                     else if(name.equals("description")||name.equals("summary")||name.equals("subtitle")) item.summary=clean(p.nextText());
                     else if(name.equals("encoded")||name.equals("content")) {
-                        String url=p.getAttributeValue(null,"url"), type=p.getAttributeValue(null,"type");
-                        if(url!=null && type!=null && type.startsWith("image")) { item.image=url; }
-                        else if("xhtml".equals(type)) item.body=clean(readElementText(p));
-                        else { String value=p.nextText(); if(item.body==null) item.body=clean(value); }
+                        String url=p.getAttributeValue(null,"url");
+                        if(url==null) url=p.getAttributeValue(null,"href");
+                        String type=p.getAttributeValue(null,"type");
+                        if(url!=null && ((type!=null && type.startsWith("image")) || url.matches("(?i).*\\.(jpg|jpeg|png|webp)(\\?.*)?$"))) item.image=url;
+                        else skipElement(p);
                     }
                     else if(name.equals("link")) {
                         String href=p.getAttributeValue(null,"href"), rel=p.getAttributeValue(null,"rel");
@@ -61,8 +62,8 @@ public class RssParser {
                     if(item.image==null) item.image=extractImage(item.summary);
                     if(item.title!=null&&!item.title.isEmpty()&&item.link!=null) {
                         String summary=item.summary==null?"":item.summary;
-                        String body=item.body==null||item.body.isEmpty()?summary:item.body;
-                        out.add(new NewsEntity(sha256(item.link),item.title,summary,body,item.image,source.name,source.id,
+                        // Keep only the publisher-provided summary. Full article content is never copied into Room.
+                        out.add(new NewsEntity(sha256(item.link),item.title,summary,summary,item.image,source.name,source.id,
                                 inferTopic(source.topic,item.title+" "+summary),item.link,item.author,parseDate(item.date),
                                 false,0,0,false,System.currentTimeMillis()));
                     }
@@ -73,12 +74,9 @@ public class RssParser {
         }
         return out;
     }
-    private String readElementText(XmlPullParser p) throws Exception {
-        StringBuilder b=new StringBuilder(); int depth=1;
-        while(depth>0) { int e=p.next(); if(e==XmlPullParser.START_TAG) depth++;
-            else if(e==XmlPullParser.END_TAG) depth--;
-            else if(e==XmlPullParser.TEXT||e==XmlPullParser.CDSECT) b.append(p.getText()).append(' '); }
-        return b.toString();
+    private void skipElement(XmlPullParser p) throws Exception {
+        int depth=1;
+        while(depth>0) { int e=p.next(); if(e==XmlPullParser.START_TAG) depth++; else if(e==XmlPullParser.END_TAG) depth--; }
     }
     private String clean(String s) {
         if(s==null)return "";
@@ -108,5 +106,5 @@ public class RssParser {
         byte[] a=MessageDigest.getInstance("SHA-256").digest(s.getBytes(StandardCharsets.UTF_8));
         StringBuilder b=new StringBuilder(); for(byte x:a)b.append(String.format(Locale.US,"%02x",x)); return b.toString();
     }
-    private static class Item { String title,summary,body,image,link,date,author; }
+    private static class Item { String title,summary,image,link,date,author; }
 }

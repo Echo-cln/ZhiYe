@@ -30,12 +30,17 @@ public class ArticleDetailFragment extends Fragment {
         NewsViewModel vm=new ViewModelProvider(this).get(NewsViewModel.class);
         if(id==null) { Toast.makeText(requireContext(),"未找到文章",Toast.LENGTH_SHORT).show(); return; }
         vm.byId(id,n->{
-            if(!isAdded() || n==null) return;
+            if(!isAdded()||n==null)return;
             ((TextView)v.findViewById(R.id.detail_title)).setText(n.title);
             ((TextView)v.findViewById(R.id.detail_summary)).setText(n.summary);
             ((TextView)v.findViewById(R.id.detail_source)).setText(n.sourceName+"  ·  "+n.topic);
             ((TextView)v.findViewById(R.id.detail_date)).setText(new SimpleDateFormat("yyyy年MM月dd日 HH:mm",Locale.CHINA).format(new Date(n.publishedAt)));
-            ((TextView)v.findViewById(R.id.detail_body)).setText(n.body==null?n.summary:n.body);
+            TextView body=v.findViewById(R.id.detail_body), notice=v.findViewById(R.id.detail_notice);
+            boolean external=!n.isLocal && !"知页样例".equals(n.sourceName);
+            body.setVisibility(external?View.GONE:View.VISIBLE);
+            body.setText(n.body==null?n.summary:n.body);
+            notice.setVisibility(external?View.VISIBLE:View.GONE);
+            notice.setText("以上为媒体订阅源提供的摘要。知页不复制整篇新闻，阅读全文请前往原媒体页面。");
             ImageView image=v.findViewById(R.id.detail_image);
             if(n.imageUrl!=null&&!n.imageUrl.isEmpty()) Glide.with(this).load(n.imageUrl).centerCrop().into(image);
             else image.setVisibility(View.GONE);
