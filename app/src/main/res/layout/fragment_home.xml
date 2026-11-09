@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:background="@color/paper" android:paddingStart="20dp" android:paddingEnd="20dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:gravity="center_vertical" android:paddingTop="18dp" android:paddingBottom="8dp">
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="知页"
-                android:textColor="@color/ink" android:textSize="32sp" android:fontFamily="serif" android:textStyle="bold"/>
-            <TextView android:id="@+id/edition_date" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="今日版" android:textColor="@color/secondary_ink" android:textSize="11sp" android:letterSpacing="0.08"/>
-        </LinearLayout>
-        <ImageButton android:id="@+id/search_button" android:layout_width="44dp" android:layout_height="44dp"
-            android:src="@android:drawable/ic_menu_search" android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="搜索" app:tint="@color/ink"/>
-        <ImageButton android:id="@+id/refresh_button" android:layout_width="44dp" android:layout_height="44dp"
-            android:src="@android:drawable/ic_popup_sync" android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="刷新新闻" app:tint="@color/ink"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/ink"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14dp"
-        android:text="把重要的事，读清楚。" android:textColor="@color/ink" android:textSize="17sp" android:fontFamily="serif"/>
-    <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:scrollbars="none" android:layout_marginTop="12dp">
-        <com.google.android.material.chip.ChipGroup android:id="@+id/topic_chips"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            app:singleLine="true" app:singleSelection="true" app:chipSpacingHorizontal="6dp"/>
-    </HorizontalScrollView>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:gravity="center_vertical" android:paddingTop="8dp" android:paddingBottom="8dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="媒体来源"
-            android:textSize="12sp" android:textColor="@color/secondary_ink"/>
-        <Spinner android:id="@+id/source_filter" android:layout_width="0dp" android:layout_height="40dp"
-            android:layout_weight="1" android:paddingStart="8dp" android:spinnerMode="dropdown"/>
-    </LinearLayout>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:id="@+id/swipe_refresh"
-        android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
-        <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView android:id="@+id/news_recycler"
-                android:layout_width="match_parent" android:layout_height="match_parent"
-                android:clipToPadding="false" android:paddingBottom="12dp"/>
-            <TextView android:id="@+id/empty_state" android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_gravity="center" android:gravity="center" android:visibility="gone"
-                android:text="暂时没有符合条件的新闻\n下拉刷新，或调整筛选条件"
-                android:textColor="@color/muted" android:textSize="14sp" android:padding="24dp"/>
-        </FrameLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+ android:background="@color/surface_white" android:paddingStart="18dp" android:paddingEnd="18dp">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+  android:gravity="center_vertical" android:paddingTop="10dp" android:paddingBottom="8dp">
+  <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+   <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="知页"
+    android:textColor="@color/ink" android:textSize="25sp" android:textStyle="bold"/>
+   <TextView android:id="@+id/edition_date" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="今日版" android:textColor="@color/secondary_ink" android:textSize="11sp"/>
+  </LinearLayout>
+  <ImageButton android:id="@+id/search_button" android:layout_width="40dp" android:layout_height="40dp"
+   android:src="@drawable/ic_search" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="搜索" app:tint="@color/ink"/>
+  <ImageButton android:id="@+id/refresh_button" android:layout_width="40dp" android:layout_height="40dp"
+   android:src="@drawable/ic_refresh" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="刷新新闻" app:tint="@color/ink"/>
+ </LinearLayout>
+ <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/rule"/>
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+  android:gravity="center_vertical" android:paddingTop="12dp" android:paddingBottom="5dp">
+  <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+   android:text="关注议题" android:textColor="@color/ink" android:textSize="13sp" android:textStyle="bold"/>
+  <TextView android:id="@+id/home_topics_all" android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:text="全部议题  ›" android:textColor="@color/accent" android:textSize="12sp" android:padding="6dp"/>
+ </LinearLayout>
+ <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:scrollbars="none">
+  <com.google.android.material.chip.ChipGroup android:id="@+id/topic_chips" android:layout_width="wrap_content"
+   android:layout_height="wrap_content" app:singleLine="true" app:singleSelection="true" app:chipSpacingHorizontal="6dp"/>
+ </HorizontalScrollView>
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+  android:gravity="center_vertical" android:paddingTop="3dp" android:paddingBottom="4dp">
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="来源"
+   android:textSize="12sp" android:textColor="@color/secondary_ink"/>
+  <Spinner android:id="@+id/source_filter" android:layout_width="0dp" android:layout_height="40dp"
+   android:layout_weight="1" android:paddingStart="6dp" android:spinnerMode="dropdown"/>
+  <TextView android:id="@+id/source_directory_button" android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:text="媒体目录  ›" android:textColor="@color/accent" android:textSize="12sp" android:padding="8dp"/>
+ </LinearLayout>
+ <androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:id="@+id/swipe_refresh"
+  android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+  <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
+   <androidx.recyclerview.widget.RecyclerView android:id="@+id/news_recycler" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:clipToPadding="false" android:paddingBottom="12dp"/>
+   <TextView android:id="@+id/empty_state" android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_gravity="center" android:gravity="center" android:visibility="gone"
+    android:text="暂时没有符合条件的新闻\n下拉刷新，或调整筛选条件" android:textColor="@color/muted" android:textSize="13sp" android:padding="24dp"/>
+  </FrameLayout>
+ </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
