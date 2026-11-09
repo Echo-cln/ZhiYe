@@ -24,19 +24,30 @@ public class EditorFragment extends Fragment {
     private Spinner topic;
     private String articleId;
     private NewsEntity editing;
+    private View saveButton,deleteButton;
     @Nullable @Override public View onCreateView(@NonNull LayoutInflater i,@Nullable ViewGroup c,@Nullable Bundle s) { return i.inflate(R.layout.fragment_editor,c,false); }
     @Override public void onViewCreated(@NonNull View v,@Nullable Bundle s) {
         vm=new ViewModelProvider(this).get(NewsViewModel.class);
         title=v.findViewById(R.id.editor_title); summary=v.findViewById(R.id.editor_summary); body=v.findViewById(R.id.editor_body); topic=v.findViewById(R.id.editor_topic);
-        topic.setAdapter(new ArrayAdapter<>(requireContext(),android.R.layout.simple_spinner_dropdown_item,new String[]{"科技","政治","经济","文化","社会观察","娱乐"}));
+        String[] topics={"科技","政治","经济","文化","社会观察","娱乐"};
+        topic.setAdapter(new ArrayAdapter<>(requireContext(),android.R.layout.simple_spinner_dropdown_item,topics));
+        saveButton=v.findViewById(R.id.editor_save); deleteButton=v.findViewById(R.id.editor_delete);
         articleId=getArguments()==null?null:getArguments().getString("articleId");
-        View delete=v.findViewById(R.id.editor_delete);
         if(articleId!=null) {
-            delete.setVisibility(View.VISIBLE);
-            vm.byId(articleId,n->{ if(!isAdded()||n==null)return; editing=n; title.setText(n.title); summary.setText(n.summary); body.setText(n.body); });
-            delete.setOnClickListener(x->{ vm.deleteLocal(articleId); Navigation.findNavController(v).popBackStack(); });
+            saveButton.setEnabled(false); deleteButton.setVisibility(View.VISIBLE); deleteButton.setEnabled(false);
+            vm.byId(articleId,n->{
+                if(!isAdded()||n==null)return;
+                editing=n; title.setText(n.title); summary.setText(n.summary); body.setText(n.body);
+                for(int i=0;i<topics.length;i++) if(topics[i].equals(n.topic)) { topic.setSelection(i); break; }
+                saveButton.setEnabled(true); deleteButton.setEnabled(true);
+            });
+            deleteButton.setOnClickListener(x->{
+                new androidx.appcompat.app.AlertDialog.Builder(requireContext()).setTitle("删除这条新闻？")
+                        .setMessage("删除后无法恢复。").setNegativeButton("取消",null)
+                        .setPositiveButton("删除",(d,w)->{ vm.deleteLocal(articleId); Navigation.findNavController(v).popBackStack(); }).show();
+            });
         }
-        v.findViewById(R.id.editor_save).setOnClickListener(x->save(v));
+        saveButton.setOnClickListener(x->save(v));
     }
     private void save(View v) {
         String t=title.getText().toString().trim();
