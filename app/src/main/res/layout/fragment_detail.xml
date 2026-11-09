@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/paper" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="22dp">
+        <TextView android:id="@+id/detail_source" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="媒体 · 议题"
+            android:textColor="@color/accent" android:textSize="12sp"/>
+        <TextView android:id="@+id/detail_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="新闻标题"
+            android:textColor="@color/ink" android:textSize="28sp" android:fontFamily="serif" android:textStyle="bold"
+            android:lineSpacingExtra="5dp" android:layout_marginTop="14dp"/>
+        <TextView android:id="@+id/detail_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="发布时间"
+            android:textColor="@color/muted" android:textSize="11sp" android:layout_marginTop="10dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/rule" android:layout_marginTop="16dp"/>
+        <ImageView android:id="@+id/detail_image" android:layout_width="match_parent" android:layout_height="210dp"
+            android:scaleType="centerCrop" android:contentDescription="新闻图片" android:layout_marginTop="18dp"/>
+        <TextView android:id="@+id/detail_summary" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/secondary_ink" android:textSize="16sp" android:fontFamily="serif" android:lineSpacingExtra="6dp" android:layout_marginTop="18dp"/>
+        <TextView android:id="@+id/detail_body" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/ink" android:textSize="15sp" android:lineSpacingExtra="8dp" android:layout_marginTop="20dp"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:layout_marginTop="24dp">
+            <com.google.android.material.button.MaterialButton android:id="@+id/detail_bookmark" android:layout_width="0dp" android:layout_height="48dp"
+                android:layout_weight="1" android:text="收藏" style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            <com.google.android.material.button.MaterialButton android:id="@+id/detail_original" android:layout_width="0dp" android:layout_height="48dp"
+                android:layout_weight="1" android:text="阅读原文" android:layout_marginStart="10dp" app:backgroundTint="@color/ink"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

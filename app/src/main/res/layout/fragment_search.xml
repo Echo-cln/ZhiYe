@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/paper" android:padding="20dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="搜索"
+        android:textColor="@color/ink" android:textSize="28sp" android:fontFamily="serif" android:textStyle="bold"/>
+    <EditText android:id="@+id/search_input" android:layout_width="match_parent" android:layout_height="48dp"
+        android:hint="搜索新闻标题、摘要或媒体" android:singleLine="true" android:inputType="text"
+        android:backgroundTint="@color/rule" android:layout_marginTop="14dp"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/search_results" android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="1" android:layout_marginTop="12dp"/>
+</LinearLayout>
