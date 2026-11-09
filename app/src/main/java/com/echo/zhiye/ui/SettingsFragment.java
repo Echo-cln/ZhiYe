@@ -26,7 +26,7 @@ public class SettingsFragment extends Fragment {
   int size=prefs.fontSizeSp();font.setMax(8);font.setProgress(size-14);int oldSpacing=prefs.lineSpacingExtraDp();
   int selected=oldSpacing<=4?0:oldSpacing<=8?1:2;spacing.setSelection(selected);applyPreview(preview,size,values[selected]);label.setText("正文大小 · "+size+"sp");
   font.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-   @Override public void onProgressChanged(SeekBar b,int p,boolean fromUser){int current=14+p;label.setText("正文大小 · "+current+"sp");applyPreview(preview,current,values[spacing.getSelectedItemPosition()]);if(fromUser)prefs.setFontSizeSp(current);}
+   @Override public void onProgressChanged(SeekBar b,int p,boolean fromUser){int current=14+p;label.setText("正文大小 · "+current+"sp");int selectedSpacing=Math.max(0,Math.min(2,spacing.getSelectedItemPosition()));applyPreview(preview,current,values[selectedSpacing]);if(fromUser)prefs.setFontSizeSp(current);}
    @Override public void onStartTrackingTouch(SeekBar b){}
    @Override public void onStopTrackingTouch(SeekBar b){}
   });
