@@ -21,5 +21,14 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
-      - name: Build and test
+      - name: Build and unit tests
         run: gradle assembleDebug testDebugUnitTest
+      - name: Room instrumentation tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          target: google_apis
+          profile: pixel_2
+          disable-animations: true
+          script: gradle connectedDebugAndroidTest
