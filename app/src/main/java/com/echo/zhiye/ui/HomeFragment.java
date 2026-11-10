@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.echo.zhiye.R;
 import com.echo.zhiye.data.NewsEntity;
 import com.echo.zhiye.data.NewsSource;
@@ -41,6 +43,7 @@ public class HomeFragment extends Fragment {
     private String source = "全部";
     private View root;
     private View tabletPane;
+    private String tabletSelectedId;
     private LiveData<List<NewsEntity>> active;
     private Observer<List<NewsEntity>> activeObserver;
 
@@ -151,19 +154,65 @@ public class HomeFragment extends Fragment {
             adapter.submit(items);
             boolean empty = items == null || items.isEmpty();
             root.findViewById(R.id.empty_state).setVisibility(empty ? View.VISIBLE : View.GONE);
-            if (tabletPane != null) tabletPane.setVisibility(empty ? View.GONE : View.VISIBLE);
+            if (tabletPane != null) {
+                if (empty) {
+                    tabletPane.setVisibility(View.GONE);
+                    tabletSelectedId = null;
+                } else {
+                    NewsEntity selected = null;
+                    if (tabletSelectedId != null) {
+                        for (NewsEntity item : items) {
+                            if (tabletSelectedId.equals(item.id)) {
+                                selected = item;
+                                break;
+                            }
+                        }
+                    }
+                    showTabletDetail(selected == null ? items.get(0) : selected);
+                }
+            }
         };
         active.observe(getViewLifecycleOwner(), activeObserver);
     }
 
     private void showTabletDetail(NewsEntity article) {
+        if (article == null || tabletPane == null) return;
+        tabletSelectedId = article.id;
         tabletPane.setVisibility(View.VISIBLE);
+
         ((TextView) tabletPane.findViewById(R.id.tablet_detail_source))
-                .setText(article.sourceName + "  ·  " + article.topic);
+                .setText(article.topic == null ? "" : article.topic);
         ((TextView) tabletPane.findViewById(R.id.tablet_detail_title)).setText(article.title);
-        ((TextView) tabletPane.findViewById(R.id.tablet_detail_summary)).setText(article.summary);
-        ((TextView) tabletPane.findViewById(R.id.tablet_detail_body))
-                .setText(article.body == null ? article.summary : article.body);
+        ((TextView) tabletPane.findViewById(R.id.tablet_detail_summary))
+                .setText(article.summary == null ? "" : article.summary);
+
+        String date = article.publishedAt > 0
+                ? new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA).format(new Date(article.publishedAt))
+                : "时间未提供";
+        ((TextView) tabletPane.findViewById(R.id.tablet_detail_meta))
+                .setText(article.sourceName + "  ·  " + date);
+
+        ImageView image = tabletPane.findViewById(R.id.tablet_detail_image);
+        if (article.imageUrl != null && !article.imageUrl.isEmpty()) {
+            image.setVisibility(View.VISIBLE);
+            Glide.with(this).load(article.imageUrl).centerCrop()
+                    .placeholder(R.drawable.bg_image_placeholder)
+                    .error(R.drawable.bg_image_placeholder).into(image);
+        } else {
+            Glide.with(this).clear(image);
+            image.setVisibility(View.GONE);
+        }
+
+        boolean external = !article.isLocal && !"知页样例".equals(article.sourceName);
+        TextView body = tabletPane.findViewById(R.id.tablet_detail_body);
+        boolean hasSeparateBody = article.body != null && !article.body.trim().isEmpty()
+                && !article.body.equals(article.summary);
+        body.setVisibility(hasSeparateBody ? View.VISIBLE : View.GONE);
+        body.setText(hasSeparateBody ? article.body : "");
+        TextView notice = tabletPane.findViewById(R.id.tablet_detail_notice);
+        notice.setVisibility(external ? View.VISIBLE : View.GONE);
+        notice.setText("当前展示媒体订阅源提供的摘要。阅读全文请前往原媒体页面。");
+
         tabletPane.findViewById(R.id.tablet_open_detail).setOnClickListener(ignored -> {
             Bundle args = new Bundle();
             args.putString("articleId", article.id);
