@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:layout_marginBottom="2dp"
+ app:cardBackgroundColor="@color/surface_white" app:cardCornerRadius="0dp" app:cardElevation="0dp" app:strokeColor="@color/soft_rule" app:strokeWidth="0dp">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal"
+  android:gravity="center_vertical" android:paddingTop="12dp" android:paddingBottom="12dp">
+  <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:paddingEnd="10dp">
+   <TextView android:id="@+id/article_topic" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="科技" android:textColor="@color/accent" android:textSize="10sp"/>
+   <TextView android:id="@+id/article_title" android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:text="新闻标题" android:textColor="@color/ink" android:textSize="16sp" android:textStyle="bold"
+    android:lineSpacingExtra="2dp" android:layout_marginTop="4dp"/>
+   <TextView android:id="@+id/article_summary" android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:text="新闻摘要" android:textColor="@color/secondary_ink" android:textSize="12sp" android:maxLines="2"
+    android:ellipsize="end" android:lineSpacingExtra="2dp" android:layout_marginTop="4dp"/>
+   <TextView android:id="@+id/article_meta" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="BBC · 2 小时前" android:textColor="@color/muted" android:textSize="10sp" android:layout_marginTop="6dp"/>
+   <TextView android:id="@+id/article_sample" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="样例内容" android:textColor="@color/accent" android:textSize="9sp" android:visibility="gone"/>
+  </LinearLayout>
+  <ImageView android:id="@+id/article_image" android:layout_width="92dp" android:layout_height="76dp"
+   android:scaleType="centerCrop" android:contentDescription="新闻图片"/>
+  <ImageButton android:id="@+id/article_bookmark" android:layout_width="34dp" android:layout_height="40dp"
+   android:layout_marginStart="2dp" android:src="@drawable/ic_bookmark_outline" android:background="?attr/selectableItemBackgroundBorderless"
+   android:contentDescription="收藏" app:tint="@color/secondary_ink"/>
+ </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

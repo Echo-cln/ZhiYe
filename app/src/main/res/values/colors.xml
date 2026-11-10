@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ <color name="paper">#FFFFFF</color>
+ <color name="surface_white">#FFFFFF</color>
+ <color name="ink">#202833</color>
+ <color name="secondary_ink">#626D79</color>
+ <color name="muted">#8B949E</color>
+ <color name="rule">#DDE3E9</color>
+ <color name="soft_rule">#EEF1F4</color>
+ <color name="accent">#286BA6</color>
+ <color name="chip_bg">#F4F7FA</color>
+</resources>

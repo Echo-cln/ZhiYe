@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/surface_white">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="我的"
+   android:textColor="@color/ink" android:textSize="22sp" android:textStyle="bold"/>
+  <TextView android:id="@+id/profile_name" android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:text="欢迎来到知页" android:textColor="@color/ink" android:textSize="20sp" android:textStyle="bold" android:layout_marginTop="22dp"/>
+  <TextView android:id="@+id/profile_email" android:layout_width="wrap_content" android:layout_height="wrap_content"
+   android:text="登录后管理你的阅读记录" android:textColor="@color/secondary_ink" android:textSize="12sp" android:layout_marginTop="4dp"/>
+  <com.google.android.material.button.MaterialButton android:id="@+id/profile_auth" android:layout_width="match_parent"
+   android:layout_height="46dp" android:text="登录 / 注册" android:layout_marginTop="16dp" app:backgroundTint="@color/accent"/>
+  <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/rule" android:layout_marginTop="18dp"/>
+  <TextView android:id="@+id/profile_favorites" android:layout_width="match_parent" android:layout_height="50dp" android:gravity="center_vertical"
+   android:text="我的收藏" android:textColor="@color/ink" android:textSize="14sp" android:background="?attr/selectableItemBackground"/>
+  <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/soft_rule"/>
+  <TextView android:id="@+id/profile_history" android:layout_width="match_parent" android:layout_height="50dp" android:gravity="center_vertical"
+   android:text="阅读历史" android:textColor="@color/ink" android:textSize="14sp" android:background="?attr/selectableItemBackground"/>
+  <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/soft_rule"/>
+  <TextView android:id="@+id/profile_local" android:layout_width="match_parent" android:layout_height="50dp" android:gravity="center_vertical"
+   android:text="本地新闻管理" android:textColor="@color/ink" android:textSize="14sp" android:background="?attr/selectableItemBackground"/>
+  <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/soft_rule"/>
+  <TextView android:id="@+id/profile_settings" android:layout_width="match_parent" android:layout_height="50dp" android:gravity="center_vertical"
+   android:text="阅读设置" android:textColor="@color/ink" android:textSize="14sp" android:background="?attr/selectableItemBackground"/>
+ </LinearLayout>
+</ScrollView>

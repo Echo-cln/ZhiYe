@@ -1,0 +1,2 @@
+-keep class androidx.room.** { *; }
+-dontwarn org.xmlpull.v1.**

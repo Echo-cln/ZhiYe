@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">知页</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_topics">议题</string>
+    <string name="nav_sources">媒体</string>
+    <string name="nav_profile">我的</string>
+</resources>
