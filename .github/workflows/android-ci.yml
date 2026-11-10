@@ -33,18 +33,29 @@ jobs:
           disable-animations: true
           script: |
             gradle connectedDebugAndroidTest
+            mkdir -p app/build/preview
             adb shell am force-stop com.echo.zhiye
             adb shell am start -n com.echo.zhiye/.MainActivity
             sleep 4
-            mkdir -p app/build/preview
-            adb shell screencap -p /sdcard/zhiye-home.png
-            adb pull /sdcard/zhiye-home.png app/build/preview/zhiye-home.png
-      - name: Upload debug APK and emulator preview
+            adb shell screencap -p /sdcard/zhiye-phone.png
+            adb pull /sdcard/zhiye-phone.png app/build/preview/zhiye-phone.png
+            adb shell wm size 1280x800
+            adb shell wm density 160
+            adb shell settings put system accelerometer_rotation 0
+            adb shell settings put system user_rotation 1
+            sleep 2
+            adb shell am force-stop com.echo.zhiye
+            adb shell am start -n com.echo.zhiye/.MainActivity
+            sleep 4
+            adb shell screencap -p /sdcard/zhiye-tablet.png
+            adb pull /sdcard/zhiye-tablet.png app/build/preview/zhiye-tablet.png
+      - name: Upload debug APK and emulator previews
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: zhiye-debug-and-preview
+          name: zhiye-debug-and-previews
           path: |
             app/build/outputs/apk/debug/app-debug.apk
-            app/build/preview/zhiye-home.png
+            app/build/preview/zhiye-phone.png
+            app/build/preview/zhiye-tablet.png
           retention-days: 14
