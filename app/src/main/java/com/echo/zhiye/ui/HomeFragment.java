@@ -57,8 +57,8 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(NewsViewModel.class);
 
         TextView editionDate = view.findViewById(R.id.edition_date);
-        editionDate.setText("今日版  ·  " +
-                new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA).format(new Date()));
+        editionDate.setText(new SimpleDateFormat("yyyy年MM月dd日  EEEE", Locale.CHINA)
+                .format(new Date()));
 
         RecyclerView list = view.findViewById(R.id.news_recycler);
         list.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
                         article.isBookmarked ? "已加入收藏" : "已取消收藏",
                         Toast.LENGTH_SHORT).show();
             }
-        });
+        }, true, true);
         list.setAdapter(adapter);
 
         ChipGroup chips = view.findViewById(R.id.topic_chips);
