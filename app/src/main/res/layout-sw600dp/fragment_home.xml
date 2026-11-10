@@ -233,6 +233,23 @@
                 android:background="@color/rule" />
 
             <TextView
+                android:id="@+id/tablet_detail_meta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:textColor="@color/muted"
+                android:textSize="11sp" />
+
+            <ImageView
+                android:id="@+id/tablet_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="新闻图片"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/tablet_detail_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -249,6 +266,15 @@
                 android:lineSpacingExtra="6dp"
                 android:textColor="@color/ink"
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tablet_detail_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/muted"
+                android:textSize="11sp"
+                android:visibility="gone" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/tablet_open_detail"
