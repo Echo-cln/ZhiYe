@@ -23,7 +23,7 @@ jobs:
           gradle-version: "8.9"
       - name: Build and unit tests
         run: gradle assembleDebug testDebugUnitTest
-      - name: Room instrumentation tests
+      - name: Room and RSS instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
@@ -31,11 +31,20 @@ jobs:
           target: google_apis
           profile: pixel_2
           disable-animations: true
-          script: gradle connectedDebugAndroidTest
-      - name: Upload debug APK
+          script: |
+            gradle connectedDebugAndroidTest
+            adb shell am force-stop com.echo.zhiye
+            adb shell am start -n com.echo.zhiye/.MainActivity
+            sleep 4
+            mkdir -p app/build/preview
+            adb shell screencap -p /sdcard/zhiye-home.png
+            adb pull /sdcard/zhiye-home.png app/build/preview/zhiye-home.png
+      - name: Upload debug APK and emulator preview
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: zhiye-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: zhiye-debug-and-preview
+          path: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/preview/zhiye-home.png
           retention-days: 14
