@@ -97,8 +97,6 @@ public class NewsRepository {
                     for (NewsEntity article : articles) {
                         long insertedRowId = dao.insertIfAbsent(article);
                         if (insertedRowId != -1L) newArticles.incrementAndGet();
-                        // Update only fields actually supplied by the feed. Missing dates,
-                        // images or authors must not erase previously known metadata.
                         dao.updateRemoteMetadata(article.id, article.title, article.summary, article.body,
                                 article.imageUrl, article.sourceName, article.sourceId, article.topic,
                                 article.author, article.publishedAt);
@@ -122,25 +120,25 @@ public class NewsRepository {
             List<NewsEntity> samples = new ArrayList<>();
             long now = System.currentTimeMillis();
             samples.add(sample("sample-01",
-                    "当人工智能进入日常工具，下一步是重新设计人与技术的关系",
-                    "从生成式模型到个人智能助理，技术变化正在改变普通人的工作与学习方式。",
+                    "当人工智能走进课堂，我们该如何学习",
+                    "工具正在改变获取知识的方式，也让独立思考变得更加重要。",
                     "科技", now));
             samples.add(sample("sample-02",
-                    "全球公共议题的讨论，正在回到制度与治理本身",
-                    "政策如何形成、公共资源如何分配，是观察政治的重要入口。",
-                    "政治", now - 3600000));
+                    "公共空间，正在重新连接日常生活",
+                    "从街角公园到社区书店，重新发现日常生活的连接。",
+                    "社会观察", now - 3600000));
             samples.add(sample("sample-03",
+                    "从课堂到开源社区，年轻开发者迈出第一步",
+                    "校园与技术创新的真实故事。",
+                    "校园", now - 7200000));
+            samples.add(sample("sample-04",
+                    "理解数据隐私，从一次应用授权开始",
+                    "在数字生活中，如何更清晰地管理个人信息。",
+                    "科技", now - 10800000));
+            samples.add(sample("sample-05",
                     "观察经济数据，也要看见数据背后的普通生活",
                     "就业、消费、产业投资与家庭预期共同构成经济运行的现实图景。",
-                    "经济", now - 7200000));
-            samples.add(sample("sample-04",
-                    "城市文化空间如何在更新中保留公共性",
-                    "书店、剧场、博物馆与街区文化，成为理解城市生活的窗口。",
-                    "文化", now - 10800000));
-            samples.add(sample("sample-05",
-                    "从一项社区服务，看公共生活的细微变化",
-                    "社会观察不只关注宏大议题，也关心制度如何落到具体的人。",
-                    "社会观察", now - 14400000));
+                    "经济", now - 14400000));
             samples.add(sample("sample-06",
                     "影视与音乐产业：内容之外，还有新的观看方式",
                     "流媒体、院线、现场演出与粉丝文化共同影响文娱产业结构。",
