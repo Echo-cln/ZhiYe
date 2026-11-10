@@ -130,7 +130,7 @@ public class NewsRepository {
             samples.add(sample("sample-03",
                     "从课堂到开源社区，年轻开发者迈出第一步",
                     "校园与技术创新的真实故事。",
-                    "校园", now - 7200000));
+                    "社会观察", now - 7200000));
             samples.add(sample("sample-04",
                     "理解数据隐私，从一次应用授权开始",
                     "在数字生活中，如何更清晰地管理个人信息。",
